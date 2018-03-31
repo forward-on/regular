@@ -1,6 +1,9 @@
 package recursion;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class ResursiveSelectionSort {
 
@@ -51,6 +54,14 @@ public class ResursiveSelectionSort {
         for (int i = 0; i < randomList.length; i++) {
             System.out.println(randomList[i]);
         }
+    }
+
+
+    @Test
+    public void tt(){
+        Map map = JSONObject.parseObject("", Map.class);
+        System.out.println(map);
+
     }
 
 
