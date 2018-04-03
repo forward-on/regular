@@ -52,7 +52,7 @@ public class ResursiveSelectionSort {
         double[] randomList = {3.2, 33.3, 53.8, 1.3, 21.9, 66.2, 99.0, 45.5, 74.7, 15.3};
         randomList = selectionSort(randomList, 0, randomList.length-1);
         for (int i = 0; i < randomList.length; i++) {
-            System.out.println(randomList[i]);
+            System.out.println( randomList[i]);
         }
     }
 
