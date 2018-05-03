@@ -10,6 +10,13 @@
     <!-- AOP动态切换 -->
 
 
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
     <!--master -->
     <bean id="masterDateSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">

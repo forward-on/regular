@@ -3,10 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 默认的注解映射的支持 -->
-    <mvc:annotation-driven/>
+    <!--<mvc:annotation-driven/>-->
 
     <!--拦截器-->
     <!--<mvc:interceptors>
@@ -32,20 +33,39 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 
     <!--静态资源 -->
-    <mvc:default-servlet-handler />
+    <!--<mvc:default-servlet-handler />-->
 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize">
             <bean class="java.lang.Long">
-                <constructor-arg index="0" value="${spring.maxUploadSize}"/>
+                &lt;!&ndash;<constructor-arg index="0" value="${spring.maxUploadSize}"/>&ndash;&gt;
+                <constructor-arg index="0" value="102400"/>
             </bean>
         </property>
         <property name="defaultEncoding" value="UTF-8"/>
-    </bean>
+    </bean>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/view/" p:suffix=".html"/>
 
-    <import resource="classpath:context/application-*.xml"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <!--Model 类不干净存在业务类,无法对对象重构-->
+                <!--<ref bean="rspVoConverter"/>-->
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </util:list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--<import resource="classpath:context/application-datasource.xml"/>-->
 
 </beans>

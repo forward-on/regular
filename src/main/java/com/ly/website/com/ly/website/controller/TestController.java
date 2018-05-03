@@ -1,4 +1,4 @@
-package com.ly.website.Controller;
+package com.ly.website.com.ly.website.controller;
 
 import org.springframework.stereotype.Controller;
 
