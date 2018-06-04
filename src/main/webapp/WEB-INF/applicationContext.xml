@@ -29,8 +29,16 @@
             移除了 -->
     <context:component-scan base-package="com.ly" />
 
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <!-- 完成请求和注解POJO的映射 -->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
 
     <!--静态资源 -->
     <!--<mvc:default-servlet-handler />-->
@@ -48,11 +56,11 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/view/" p:suffix=".html"/>
 
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >
         <property name="messageConverters">
             <util:list id="beanList">
-                <!--Model 类不干净存在业务类,无法对对象重构-->
-                <!--<ref bean="rspVoConverter"/>-->
+                &lt;!&ndash;Model 类不干净存在业务类,无法对对象重构&ndash;&gt;
+                &lt;!&ndash;<ref bean="rspVoConverter"/>&ndash;&gt;
                 <ref bean="mappingJacksonHttpMessageConverter"/>
             </util:list>
         </property>
@@ -64,8 +72,8 @@
                 <value>application/json;charset=UTF-8</value>
             </list>
         </property>
-    </bean>
+    </bean>-->
 
-    <!--<import resource="classpath:context/application-datasource.xml"/>-->
+    <import resource="classpath:context/applicationContent-datasource.xml"/>
 
 </beans>
